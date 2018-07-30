@@ -15,8 +15,8 @@ Make sure Tkinter is installed in your Python env.
  
 ### Output Screens:
 
-![Screen1](Screenshots/Screen1.png)
-![Screen2](Screenshots/Screen2.png)
+![Screen1](Screenshots/Screen%201.png)
+![Screen2](Screenshots/Screen%202.png)
  
  - [x] Group Chat implemented.
  - [x] Text message support.
