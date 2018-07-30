@@ -12,7 +12,7 @@ def acceptIncomingConnections():
         addresses[client] = client_address
         Thread(target=handleClient, args=(client,)).start()
 
-def handleClient(): #Takes in client socket as argument
+def handleClient(client): #Takes in client socket as argument
     """Handles a single client connection"""
     name = client.recv(BUFSIZE).decode("utf8")
     welcome = "Welcome %s! If you want to exit chat, type {quit} to exit." % name

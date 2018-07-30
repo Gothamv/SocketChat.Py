@@ -53,7 +53,7 @@ if not PORT:
     PORT = 33000  # Default value.
 else:
     PORT = int(PORT)
-BUFSIZ = 1024
+BUFSIZE = 1024
 ADDR = (HOST, PORT)
 client_socket = socket(AF_INET, SOCK_STREAM)
 client_socket.connect(ADDR)
