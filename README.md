@@ -20,7 +20,7 @@ Make sure Tkinter is installed in your Python env.
 
 ![Screen2](Screenshots/Screen%202.png)
  
- ### Features
+ ### Features:
  - [x] Group Chat implemented.
  - [x] Text message support.
  - [ ] Pictures/Video Support. (To be added very soon)
