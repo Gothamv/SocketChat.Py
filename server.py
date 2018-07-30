@@ -32,8 +32,8 @@ def handleClient(): #Takes in client socket as argument
             break
 def broadcast(msg, prefix=""):  # prefix is for name identification.
     """Broadcasts a message to all the clients."""
-     for sock in clients:
-        sock.send(bytes(prefix, "utf8")+msg)
+    for sock in clients:
+        sock.send(bytes(prefix,"utf8")+msg)
 
 clients = {}
 addresses = {}
