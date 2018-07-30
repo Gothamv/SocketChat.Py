@@ -11,7 +11,8 @@ Make sure Tkinter is installed in your Python env.
 1) Run the server.py
 2) Run client.py in the host machine/remote machine.
    * If you wanna run the client script in the host machine, open a new terminal window and run the client.py. Enter Host as '127.0.0.1' and Port as '33000'.
-3) Tkinter GUI should open up and chat away.
+3) Tkinter GUI should open up. Chat away!
+4) Hit Ctrl+C (Keyboard Interrupt) to exit the process in terminal.
  
 ### Output Screens:
 
