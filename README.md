@@ -14,15 +14,16 @@ Make sure Tkinter is installed in your Python env.
 3) Tkinter GUI should open up. Chat away!
 4) Hit Ctrl+C (Keyboard Interrupt) to exit the process in terminal.
  
-### Output Screens:
+ ### Output Screens:
 
 ![Screen1](Screenshots/Screen%201.png)
 
 ![Screen2](Screenshots/Screen%202.png)
  
+ ### Features
  - [x] Group Chat implemented.
  - [x] Text message support.
  - [ ] Pictures/Video Support. (To be added very soon)
  - [ ] Video Chat. (To be added very soon)
  
- SocketChat() is inspired by : https://medium.com/swlh/lets-write-a-chat-app-in-python-f6783a9ac170
+ SocketChat.Py is inspired by : https://medium.com/swlh/lets-write-a-chat-app-in-python-f6783a9ac170
