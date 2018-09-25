@@ -3,9 +3,11 @@ This is a simple chat app using Sockets and Tkinter(GUI) in Python. It uses TCP 
 The user is presented with a chat room interface. Multiple users can send messages simultaneously.
 Make sure Tkinter is installed in your Python env.
 
-### There are two scripts:
-1) Server.py
-2) Client.py
+### There are four scripts:
+1) Server1.py (for Group Chat)
+2) Server2.py (for Image Transfer)
+3) Server3.py (for Video Chat)
+4) Client.py
 
 ### Steps to run the scripts:
 1) Run the server.py
@@ -23,7 +25,9 @@ Make sure Tkinter is installed in your Python env.
  ### Features:
  - [x] Group Chat implemented.
  - [x] Text message support.
- - [ ] Pictures/Video Support. (To be added very soon)
- - [ ] Video Chat. (To be added very soon)
+ - [x] Imgae Support.
+ - [x] Video Chat.
  
- SocketChat.Py is inspired by : https://medium.com/swlh/lets-write-a-chat-app-in-python-f6783a9ac170
+ SocketChat.Py is inspired by : 
+ https://medium.com/swlh/lets-write-a-chat-app-in-python-f6783a9ac170
+ https://github.com/anilshanbhag/videochat
