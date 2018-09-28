@@ -76,7 +76,7 @@ if(op == 2):
     image = raw_input('Enter the Image name: ')
     image = image + ".jpg"
 
-    HOST = '127.0.0.1'
+    HOST = '172.20.10.10'
     PORT = 6666
 
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -121,7 +121,7 @@ if(op == 3):
     import sys
 
     class Client:
-        def __init__(self, ip_addr = "127.0.0.1"):
+        def __init__(self, ip_addr = "172.20.10.10"):
             self.client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             self.client_socket.connect((ip_addr, 6000))
             self.vsock = videosocket.videosocket (self.client_socket)
@@ -136,7 +136,7 @@ if(op == 3):
                 self.videofeed.set_frame(frame)
 
     if __name__ == "__main__":
-        ip_addr = "127.0.0.1"
+        ip_addr = "172.20.10.10"
         if len(sys.argv) == 2:
             ip_addr = sys.argv[1]
 

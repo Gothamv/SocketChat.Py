@@ -1,73 +1,58 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
+"""Server for multithreaded (asynchronous) chat application."""
+from socket import AF_INET, socket, SOCK_STREAM #TCP Connection : That's why we use AF_INET, SOCK_STREAM
+from threading import Thread
 
-import random
-import socket, select
-from time import gmtime, strftime
-from random import randint
+def acceptIncomingConnections():
+    """Handles the incoming client connections"""
+    while True:
+        client, client_address = SERVER.accept()
+        print("%s : %s has connected" % client_address)
+        client.send(bytes("Welcome to SocketChat!" + "Now type your name and hit enter!","utf8"))
+        addresses[client] = client_address
+        Thread(target=handleClient, args=(client,)).start()
 
-imgcounter = 1
-basename = "image%s.jpg"
-
-HOST = '127.0.0.1'
-PORT = 6666
-
-connected_clients_sockets = []
-
-server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
-server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-server_socket.bind((HOST, PORT))
-server_socket.listen(10)
-
-connected_clients_sockets.append(server_socket)
-
-while True:
-
-    read_sockets, write_sockets, error_sockets = select.select(connected_clients_sockets, [], [])
-
-    for sock in read_sockets:
-
-        if sock == server_socket:
-
-            sockfd, client_address = server_socket.accept()
-            connected_clients_sockets.append(sockfd)
-
+def handleClient(client): #Takes in client socket as argument
+    """Handles a single client connection"""
+    name = client.recv(BUFSIZE).decode("utf8")
+    welcome = "Welcome %s! If you want to exit chat, type {quit} to exit." % name
+    client.send(bytes(welcome,"utf8"))
+    msg = "%s has joined the conversation." % name
+    broadcast(bytes(msg,"utf8"))
+    clients[client] = name
+    while True:
+        msg = client.recv(BUFSIZE)
+        if msg != bytes("{quit}","utf8"):
+            broadcast(msg, name+": ")
         else:
-            try:
+            client.send(bytes("{quit}","utf8"))
+            client.close()
+            del clients[client]
+            broadcast(bytes("%s has left the conversation." % name),"utf8")
+            break
+def broadcast(msg, prefix=""):  # prefix is for name identification.
+    """Broadcasts a message to all the clients."""
+    for sock in clients:
+        sock.send(bytes(prefix,"utf8")+msg)
 
-                data = sock.recv(4096)
-                txt = str(data)
+clients = {}
+addresses = {}
 
-                if data:
+HOST = ''
+PORT = 33000
+BUFSIZE = 1024
+ADDR = (HOST,PORT)
+SERVER = socket(AF_INET,SOCK_STREAM)
+SERVER.bind(ADDR)
 
-                    if data.startswith('SIZE'):
-                        tmp = txt.split()
-                        size = int(tmp[1])
+if __name__ == "__main__":
+    SERVER.listen(5) # Listen for 5 connections at max
+    print("waiting for connection...")
+    ACCEPT_THREAD = Thread(target=acceptIncomingConnections)
+    ACCEPT_THREAD.start() # Starts the infinite loop.
+    ACCEPT_THREAD.join()
+    SERVER.close()
 
-                        print('got size')
+#hellos
+#ssdf
 
-                        sock.sendall("GOT SIZE")
-
-                    elif data.startswith('BYE'):
-                        sock.shutdown()
-
-                    else :
-
-                        myfile = open(basename % imgcounter, 'wb')
-                        myfile.write(data)
-
-                        data = sock.recv(40960000)
-                        if not data:
-                            myfile.close()
-                            break
-                        myfile.write(data)
-                        myfile.close()
-
-                        sock.sendall("GOT IMAGE")
-                        sock.shutdown()
-            except:
-                sock.close()
-                connected_clients_sockets.remove(sock)
-                continue
-        imgcounter += 1
-server_socket.close()
